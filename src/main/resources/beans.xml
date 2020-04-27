@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- bean 主要是 springIoc（控制反转） -->
+    <!--
+        <bean>标记为指定的类定义bean。
+        properties :
+            id: bean的唯一标识符
+            class: bean的类路径 + 类名
+            lazy-init: 懒加载，让Spring容器在Bean首次用到时创建Bean实例，而不是在应用一启动就创建
+                       默认是false,为true时，首次使用时创建bean实例
+                       （lazy-init 设置只对 scope 属性为 singleton 的 bean 起作用）
+            scope: 作用域
+                单例(singleton)：默认作用域，一个spring容器中只有Bean的一个实例。
+                原型(prototype)：每次获取Bean时生成一个新的实例。
+                请求(request)：作用域是单个http请求，单个http请求只有Bean的一个实例。一旦请求完成，bean实例将被销毁。
+                会话(session)：作用域是单个会话，单个会话只有Bean的一个实例。一旦会话结束，bean实例将被销毁。
+                全局会话(global-session)：在Portlet应用程序中使用，每个全局会话只有Bean的一个实例。普通Servlet应用中与会话作用域无区别。
+            autowire: 自动装配
+                byName: 通过属性名。匹配类中的属性名和xml中依赖bean id。
+                byType: 通过属性数据类型。匹配类中的属性数据类型和依赖bean类型，如果可以匹配多个bean，则抛出致命异常。
+                constructor: 通过构造函数参数的数据类型。
+                             匹配构造函数参数的数据类型和依赖bean类型，如果容器中没找到类型匹配的Bean，抛出致命异常。
+
+        spring管理bean的生命周期:
+            创建bean
+            设置bean的属性值
+            调用bean初始化回调方法
+            使用bean
+            调用bean销毁回调方法
+            销毁bean
+     -->
+    <!-- <property>标记是bean的一个子元素，用于设置Customer类的属性，设置的属性值将由IoC容器赋值给Customer类实例。 -->
+    <!--<bean id="customerBean" class="com.dhcc.demo.Customer" lazy-init="true" scope="singleton"  init-method="init">-->
+        <!--<property name="name" value="ZhangSan"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="swordBean" class="com.dhcc.demo.di.Sword" init-method="init" destroy-method="destroy"/>-->
+
+    <!--<bean id="gunBean" class="com.dhcc.demo.di.Gun"/>-->
+
+    <!--<bean id="player2Bean" class="com.dhcc.demo.di.Player">-->
+        <!--&lt;!&ndash;-->
+            <!--松耦合，并不是不要耦合。-->
+            <!--A类依赖B类，A类和B类之间存在紧密耦合，-->
+            <!--如果把依赖关系变为A类依赖B的父类B0类，-->
+            <!--在A类与B0类的依赖关系下，-->
+            <!--A类可使用B0类的任意子类，-->
+            <!--A类与B0类的子类之间的依赖关系是松耦合的。-->
+        <!--&ndash;&gt;-->
+        <!--&lt;!&ndash; springDi 依赖注入 &ndash;&gt;-->
+        <!--&lt;!&ndash; 构造器注入 ref : 引用已配置的bean &ndash;&gt;-->
+        <!--&lt;!&ndash;<constructor-arg ref="swordBean" />&ndash;&gt;-->
+
+        <!--&lt;!&ndash; 属性注入 setXxx()  &ndash;&gt;-->
+        <!--&lt;!&ndash; String类型 &ndash;&gt;-->
+        <!--<property name="name" value="player2 " />-->
+        <!--&lt;!&ndash; Sword类型 &ndash;&gt;-->
+        <!--<property name="weapon" ref="swordBean"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="player3Bean" class="com.dhcc.demo.di.Player" autowire="byName">-->
+        <!--&lt;!&ndash;-->
+            <!--松耦合，并不是不要耦合。-->
+            <!--A类依赖B类，A类和B类之间存在紧密耦合，-->
+            <!--如果把依赖关系变为A类依赖B的父类B0类，-->
+            <!--在A类与B0类的依赖关系下，-->
+            <!--A类可使用B0类的任意子类，-->
+            <!--A类与B0类的子类之间的依赖关系是松耦合的。-->
+        <!--&ndash;&gt;-->
+        <!--&lt;!&ndash; springDi 依赖注入 &ndash;&gt;-->
+        <!--&lt;!&ndash; 构造器注入 ref : 引用已配置的bean &ndash;&gt;-->
+        <!--&lt;!&ndash;<constructor-arg ref="swordBean" />&ndash;&gt;-->
+        <!--<property name="name" value="player3 " />-->
+        <!--&lt;!&ndash; 属性注入 &ndash;&gt;-->
+        <!--<property name="weapon" ref="gunBean"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="stickBean" class="com.dhcc.demo.di.Stick"></bean>-->
+    <!-- 开启上下文组件扫描 -->
+    <context:component-scan base-package="com.dhcc.demo"></context:component-scan>
+</beans>
